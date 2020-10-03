@@ -2,6 +2,7 @@ package guru.springframework.models;
 
 import javax.persistence.*;
 
+@Entity
 public class Notes {
 
     @Id
