@@ -1,6 +1,7 @@
 package guru.springframework.models;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -15,11 +16,11 @@ public class Recipe {
     private Integer cookTime;
     private Integer servings;
     private String source;
-    private String oum;
+    private String uom;
     private String directions;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "recipe")
-    private Set<Ingredient> ingredients;
+    private Set<Ingredient> ingredients = new HashSet<>();
 
     @Lob
     private Byte[] image;
@@ -35,7 +36,15 @@ public class Recipe {
             joinColumns = @JoinColumn(name = "recipe_id"),
             inverseJoinColumns = @JoinColumn(name = "category_id")
     )
-    private Set<Category> categories;
+    private Set<Category> categories = new HashSet<>();
+
+    public Set<Category> getCategories() {
+        return categories;
+    }
+
+    public void setCategories(Set<Category> categories) {
+        this.categories = categories;
+    }
 
     public Long getId() {
         return id;
@@ -85,12 +94,12 @@ public class Recipe {
         this.source = source;
     }
 
-    public String getOum() {
-        return oum;
+    public String getUom() {
+        return uom;
     }
 
-    public void setOum(String oum) {
-        this.oum = oum;
+    public void setUom(String uom) {
+        this.uom = uom;
     }
 
     public String getDirections() {
