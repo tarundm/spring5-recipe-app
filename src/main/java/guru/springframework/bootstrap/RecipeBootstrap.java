@@ -80,13 +80,13 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
         guacNotes.setRecipe(guacRecipe);
         guacRecipe.setNotes(guacNotes);
 
-        guacRecipe.getIngredients().add(new Ingredient("ripe avocados", new BigDecimal("2"), eachUom));
-        guacRecipe.getIngredients().add(new Ingredient("teaspoon of salt", new BigDecimal("2"), teaSpoonUom));
-        guacRecipe.getIngredients().add(new Ingredient("lemon juice", new BigDecimal("2"), tableSpoonUom));
-        guacRecipe.getIngredients().add(new Ingredient("red onion", new BigDecimal("2"), eachUom));
-        guacRecipe.getIngredients().add(new Ingredient("serrano chiles", new BigDecimal("1"), pintUom));
-        guacRecipe.getIngredients().add(new Ingredient("black pepper", new BigDecimal("1"), teaSpoonUom));
-        guacRecipe.getIngredients().add(new Ingredient("tomato", new BigDecimal("2"), eachUom));
+        guacRecipe.getIngredients().add(new Ingredient("ripe avocados", new BigDecimal("2"), eachUom, guacRecipe));
+        guacRecipe.getIngredients().add(new Ingredient("teaspoon of salt", new BigDecimal("2"), teaSpoonUom, guacRecipe));
+        guacRecipe.getIngredients().add(new Ingredient("lemon juice", new BigDecimal("2"), tableSpoonUom, guacRecipe));
+        guacRecipe.getIngredients().add(new Ingredient("red onion", new BigDecimal("2"), eachUom, guacRecipe));
+        guacRecipe.getIngredients().add(new Ingredient("serrano chiles", new BigDecimal("1"), pintUom, guacRecipe));
+        guacRecipe.getIngredients().add(new Ingredient("black pepper", new BigDecimal("1"), teaSpoonUom, guacRecipe));
+        guacRecipe.getIngredients().add(new Ingredient("tomato", new BigDecimal("2"), eachUom, guacRecipe));
 
         guacRecipe.getCategories().add(americanCategory);
         guacRecipe.getCategories().add(mexicanCategory);
@@ -106,11 +106,11 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
         tacosNotes.setRecipe(tacosRecipe);
         tacosRecipe.setNotes(tacosNotes);
 
-        tacosRecipe.getIngredients().add(new Ingredient("chicken thighs", new BigDecimal("8"), eachUom));
-        tacosRecipe.getIngredients().add(new Ingredient("salt", new BigDecimal(".5"), teaSpoonUom));
-        tacosRecipe.getIngredients().add(new Ingredient("black pepper\n", new BigDecimal("1"), tableSpoonUom));
-        tacosRecipe.getIngredients().add(new Ingredient(" salsa verde", new BigDecimal("1.5"), eachUom));
-        tacosRecipe.getIngredients().add(new Ingredient("Oil", new BigDecimal("2"), tableSpoonUom));
+        tacosRecipe.getIngredients().add(new Ingredient("chicken thighs", new BigDecimal("8"), eachUom, tacosRecipe));
+        tacosRecipe.getIngredients().add(new Ingredient("salt", new BigDecimal(".5"), teaSpoonUom, tacosRecipe));
+        tacosRecipe.getIngredients().add(new Ingredient("black pepper\n", new BigDecimal("1"), tableSpoonUom, tacosRecipe));
+        tacosRecipe.getIngredients().add(new Ingredient(" salsa verde", new BigDecimal("1.5"), eachUom, tacosRecipe));
+        tacosRecipe.getIngredients().add(new Ingredient("Oil", new BigDecimal("2"), tableSpoonUom, tacosRecipe));
 
         tacosRecipe.getCategories().add(americanCategory);
         tacosRecipe.getCategories().add(mexicanCategory);
