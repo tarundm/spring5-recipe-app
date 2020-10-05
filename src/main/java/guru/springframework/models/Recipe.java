@@ -114,6 +114,12 @@ public class Recipe {
         return ingredients;
     }
 
+    public Recipe addIngredient(Ingredient ingredient){
+        ingredient.setRecipe(this);
+        this.getIngredients().add(ingredient);
+        return this;
+    }
+
     public void setIngredients(Set<Ingredient> ingredients) {
         this.ingredients = ingredients;
     }
@@ -130,7 +136,10 @@ public class Recipe {
         return notes;
     }
 
+    // Moved code that sets recipe from RecipeBootstrap to here so that when Constraints is not defined
+    // we can implicitly set recipe on notes object
     public void setNotes(Notes notes) {
+        notes.setRecipe(this);
         this.notes = notes;
     }
 
