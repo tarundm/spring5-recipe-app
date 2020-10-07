@@ -4,6 +4,7 @@ import guru.springframework.models.*;
 import guru.springframework.repositories.CategoryRepository;
 import guru.springframework.repositories.RecipeRepository;
 import guru.springframework.repositories.UnitOfMeasureRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.catalina.startup.Catalina;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.ApplicationListener;
@@ -16,6 +17,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+// THis will inject logger
+@Slf4j
 @Component
 public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEvent> {
 
@@ -35,9 +38,11 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
     @Override
     public void onApplicationEvent(ContextRefreshedEvent event) {
         recipeRepository.saveAll(getRecipes());
+        log.debug("Log: Adding bootstrap data");
     }
 
     private List<Recipe> getRecipes(){
+        log.debug("Log: Entering into Get Recipes");
         List<Recipe> recipes = new ArrayList<>(2);
 
         Optional<UnitOfMeasure> eachUomOpt = unitOfMeasureRepository.findByDescription("Each");
@@ -48,6 +53,7 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
         Optional<UnitOfMeasure> cupsUomOpt = unitOfMeasureRepository.findByDescription("Cup");
         if(!eachUomOpt.isPresent() || !tableSpoonUomOpt.isPresent() || !teaSpoonUomOpt.isPresent() ||
                 !dashUomOpt.isPresent() || !pintUomOpt.isPresent() || !cupsUomOpt.isPresent()){
+            log.error("Expected UOM not found");
             throw new RuntimeException("Expected UOM not found");
         }
 
@@ -61,6 +67,7 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
         Optional<Category> americanCategoryOpt = categoryRepository.findByDescription("American");
         Optional<Category> mexicanCategoryOpt = categoryRepository.findByDescription("Mexican");
         if(!americanCategoryOpt.isPresent() || !mexicanCategoryOpt.isPresent()){
+            log.error("Expected Category not found");
             throw new RuntimeException("Expected Category not found");
         }
 
@@ -92,6 +99,7 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
         guacRecipe.getCategories().add(mexicanCategory);
 
         recipes.add(guacRecipe);
+        log.debug("Log: Added Guacamole Recipe");
 
         // Recipe2
         Recipe tacosRecipe = new Recipe();
@@ -116,6 +124,9 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
         tacosRecipe.getCategories().add(mexicanCategory);
 
         recipes.add(tacosRecipe);
+        log.debug("Log: Added Chicken Tacos Recipe");
+
+        log.debug("Log: Exiting Get Recipes");
         return recipes;
     }
 }
