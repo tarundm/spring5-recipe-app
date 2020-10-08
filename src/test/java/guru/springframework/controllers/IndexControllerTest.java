@@ -8,6 +8,10 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.ui.Model;
 
 import java.util.HashSet;
@@ -31,6 +35,23 @@ class IndexControllerTest {
     void setUp() {
         MockitoAnnotations.initMocks(this);
         indexController = new IndexController(recipeService);
+    }
+
+    @Test
+    void testMockMVC() throws Exception {
+        // This is another way of testing controller request path mapping. Earlier we had bring entire web server to
+        // test it but now we can mock web server but actually mock dispatcher servlet. This make test aroung controller
+        // very very lightweight. MockMVC mock dispatcher servlet to run the test and does not initialize whole web
+        // application context.
+
+        // Brings in whole Web application context and it become full functional test
+        // MockMvc mockMvcWeb = MockMvcBuilders.webAppContextSetup(??).build();
+
+        // standalone setup is unit test and its fast
+        MockMvc mockMvc = MockMvcBuilders.standaloneSetup(indexController).build();
+        mockMvc.perform(MockMvcRequestBuilders.get("/"))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.view().name("recipe"));
     }
 
     @Test
