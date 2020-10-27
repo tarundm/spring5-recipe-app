@@ -27,6 +27,6 @@ public class IndexController {
         log.debug("Log: Getting Index Page");
         Set<Recipe> recipes = recipeService.getRecipes();
         model.addAttribute("recipes", recipes);
-        return "recipe";
+        return "index";
     }
 }
