@@ -87,6 +87,10 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
         guacNotes.setRecipe(guacRecipe);
         guacRecipe.setNotes(guacNotes);
 
+        guacRecipe.setServings(5);
+        guacRecipe.setSource("Mothers Kitchen");
+        guacRecipe.setUrl("www.xyx.com");
+
         guacRecipe.addIngredient(new Ingredient("ripe avocados", new BigDecimal("2"), eachUom));
         guacRecipe.addIngredient(new Ingredient("teaspoon of salt", new BigDecimal("2"), teaSpoonUom));
         guacRecipe.addIngredient(new Ingredient("lemon juice", new BigDecimal("2"), tableSpoonUom));
@@ -113,6 +117,10 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
         tacosNotes.setRecipeNotes("If you aren't in a grilling mood or don’t have a");
         tacosNotes.setRecipe(tacosRecipe);
         tacosRecipe.setNotes(tacosNotes);
+
+        tacosRecipe.setServings(5);
+        tacosRecipe.setSource("Mothers Kitchen");
+        tacosRecipe.setUrl("www.xyx.com");
 
         tacosRecipe.addIngredient(new Ingredient("chicken thighs", new BigDecimal("8"), eachUom));
         tacosRecipe.addIngredient(new Ingredient("salt", new BigDecimal(".5"), teaSpoonUom));
